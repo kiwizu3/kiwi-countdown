@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* font-weight: 700; */
+            background: #0f0c29;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: #fff; /* Set text color to white */
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .countdown-container {
+            text-align: center;
+        }
+
+        .countdown {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <p>Tour to Las Vegas, Sri Lanka</p>
+        <div id="countdown" class="countdown"></div>
+    </div>
+
+    <script>
+        // Set the date of the countdown (format: year, month (0-indexed), day, hour, minute, second)
+        const countdownDate = new Date(2024, 3, 27, 4, 0, 0);
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            if (distance < 0) {
+                // If countdown is expired
+                document.getElementById('countdown').innerHTML = "සචින් ගියා!";
+            } else {
+                // Calculate time components
+                const hours = Math.floor(distance / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the countdown
+                let countdownText = "";
+                if (hours > 0) {
+                    countdownText += `${hours}h `;
+                }
+                countdownText += `${minutes}m ${seconds}s`;
+
+                document.getElementById('countdown').innerHTML = countdownText;
+            }
+        }
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+
+        // Initial call to update countdown immediately
+        updateCountdown();
+    </script>
+</body>
+</html>
